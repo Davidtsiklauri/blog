@@ -1,0 +1,12 @@
+{
+    "development": {
+        "store": {
+            "uri": "mongodb+srv://gira1234:2idU8fYWJH0wHs3g@cluster0.8fgut.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+            "useNewUrlParser": true,
+            "useCreateIndex": true,
+            "autoCreate": true,
+            "useUnifiedTopology": true,
+            "useFindAndModify": false
+        }
+    } 
+}
