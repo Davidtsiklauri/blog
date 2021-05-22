@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type CatDocument = Blog & Document;
+export type BlogDocument = Blog & Document;
 
 @Schema()
 export class Blog {
