@@ -14,7 +14,11 @@ async function bootstrap() {
   const { httpAdapter } = app.get(HttpAdapterHost);
 
   app.useGlobalPipes(
-    new ValidationPipe({ exceptionFactory, transform: true, whitelist: true }),
+    new ValidationPipe({
+      exceptionFactory,
+      transform: true,
+      whitelist: true,
+    }),
   );
   app.useGlobalFilters(new ExceptionsFilter(httpAdapter));
 

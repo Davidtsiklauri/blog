@@ -7,9 +7,9 @@ import { AddRequestBody } from '../dtos/add.dto';
 @Injectable()
 export class BlogService {
   constructor(@InjectModel(Blog.name) private blogModel: Model<BlogDocument>) {}
-  //@ts-ignore
-  async saveBlog(post: AddRequestBody): Promise<Blog> {
-    const createdPost = await new this.blogModel(post);
+
+  async saveBlog({ data }: AddRequestBody): Promise<Blog> {
+    const createdPost = await new this.blogModel(data);
     return createdPost.save();
   }
 }

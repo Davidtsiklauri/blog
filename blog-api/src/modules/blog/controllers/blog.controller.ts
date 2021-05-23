@@ -1,6 +1,13 @@
 import { BlogService } from './../services/blog.service';
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { AddRequestBody } from '../dtos/add.dto';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import { AddRequestBody, Data } from '../dtos/add.dto';
 
 @Controller('blog')
 export class BlogController {

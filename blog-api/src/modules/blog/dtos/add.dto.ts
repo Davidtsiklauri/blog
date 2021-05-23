@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
+import { IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 
-class Data {
+export class Data {
   @IsNotEmpty()
   @IsString()
   title: string;
@@ -20,5 +20,8 @@ class Data {
 }
 
 export class AddRequestBody {
-  @Type(() => Data) data: Data;
+  @IsNotEmpty()
+  @ValidateNested()
+  @Type(() => Data)
+  data: Data;
 }
