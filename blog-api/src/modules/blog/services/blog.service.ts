@@ -1,10 +1,12 @@
+import { SearchRequestDTO } from './../dtos/search.dto';
 import { ZError } from './../../base/utils/mongo-error-handler.class';
 import { Model } from 'mongoose';
 import { Body, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Blog, BlogDocument } from '../schema/blog.schema';
-import { AddRequestBody } from '../dtos/add.dto';
+import { AddRequestBody, Data } from '../dtos/add.dto';
 import { throwError } from 'rxjs';
+import { Posts } from 'src/modules/base/interfaces/blog.interface';
 
 @Injectable()
 export class BlogService {
@@ -38,5 +40,13 @@ export class BlogService {
     } catch (e) {
       throw new ZError('not found');
     }
+  }
+
+  async searchPosts(query: SearchRequestDTO): Promise<any> {
+    const paging = query.pagination.extract();
+    const documentPromise = this.blogModel.find(query.data, {}, paging);
+    const countPromise = this.blogModel.countDocuments(query.data);
+    const [blogs, amount] = await Promise.all([documentPromise, countPromise]);
+    return { blogs, amount };
   }
 }

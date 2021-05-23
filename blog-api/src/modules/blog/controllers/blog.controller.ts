@@ -1,3 +1,4 @@
+import { SearchRequestDTO } from './../dtos/search.dto';
 import { BlogService } from './../services/blog.service';
 import {
   Body,
@@ -7,15 +8,12 @@ import {
   Param,
   Post,
   Put,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
-import { AddRequestBody, Data } from '../dtos/add.dto';
+import { AddRequestBody } from '../dtos/add.dto';
 
 @Controller('blog')
 export class BlogController {
   constructor(private blogService: BlogService) {}
-
   @Post('/add')
   addPost(@Body() post: AddRequestBody) {
     return this.blogService.saveBlog(post);
@@ -34,5 +32,10 @@ export class BlogController {
   @Get(':id')
   getPost(@Param('id') postId: string) {
     return this.blogService.getPostById(postId);
+  }
+
+  @Post('/search')
+  searchBlogs(@Body() post: SearchRequestDTO) {
+    return this.blogService.searchPosts(post);
   }
 }
