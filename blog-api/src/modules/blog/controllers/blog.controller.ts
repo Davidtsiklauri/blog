@@ -6,6 +6,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -21,22 +22,17 @@ export class BlogController {
   }
 
   @Delete(':id')
-  deletePost(@Param('id') id: string) {
-    return this.blogService.deletePost(id);
+  deletePost(@Param('id') postId: string) {
+    return this.blogService.deletePost(postId);
   }
 
-  @Post('/add')
-  editPost(@Body() post: AddRequestBody) {
-    return this.blogService.saveBlog(post);
+  @Put(':id')
+  editPost(@Body() post: AddRequestBody, @Param('id') postId: string) {
+    return this.blogService.updatePost(postId, post);
   }
 
   @Get(':id')
-  getPost(@Body() post: AddRequestBody) {
-    return this.blogService.saveBlog(post);
-  }
-
-  @Get()
-  getHello(): string {
-    return 'this.appService.getHello();';
+  getPost(@Param('id') postId: string) {
+    return this.blogService.getPostById(postId);
   }
 }

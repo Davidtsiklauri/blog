@@ -15,9 +15,26 @@ export class BlogService {
     return createdPost.save();
   }
 
-  async deletePost(postId: string): Promise<any> {
+  async deletePost(postId: string): Promise<Blog> {
     try {
       return await this.blogModel.findOneAndDelete({ _id: postId });
+    } catch (e) {
+      throw new ZError('not found');
+    }
+  }
+
+  async updatePost(postId: string, { data }: any): Promise<Blog> {
+    try {
+      await this.blogModel.findOneAndUpdate({ _id: postId }, data);
+      return data;
+    } catch (e) {
+      throw new ZError('not found');
+    }
+  }
+
+  async getPostById(postId: string) {
+    try {
+      return await this.blogModel.findOne({ _id: postId });
     } catch (e) {
       throw new ZError('not found');
     }
